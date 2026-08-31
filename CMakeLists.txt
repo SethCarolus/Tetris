@@ -26,6 +26,7 @@ set(SOURCES
     ./Source/TetrisController.hpp
     ./Source/TetrisController.cpp
     ./Source/Tetromino.hpp
+    ./Source/Playfield.hpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

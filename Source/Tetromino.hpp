@@ -86,7 +86,7 @@ constexpr std::array<TetrominoData, 8> TETROMINO_LUT = {
     Z_PIECE          // Index 7: PieceType::Z
 };
 
-struct CurrentPiece {
+struct ActivePiece {
     PieceType type {};
     TetrominoData Data {};
     int8_t x;
