@@ -18,63 +18,58 @@ struct TetrominoData {
     std::array<PieceOffsets, 4> rotations;
 };
 
-constexpr TetrominoData I_PIECE = {{
-    {{{ -1,  0 }, {  0,  0 }, {  1,  0 }, {  2,  0 }}}, // Rot 0 (Spawn horizontal)
-    {{{  1, -1 }, {  1,  0 }, {  1,  1 }, {  1,  2 }}}, // Rot 1 (Vertical right)
-    {{{ -1,  1 }, {  0,  1 }, {  1,  1 }, {  2,  1 }}}, // Rot 2 (Horizontal down)
-    {{{  0, -1 }, {  0,  0 }, {  0,  1 }, {  0,  2 }}}  // Rot 3 (Vertical left)
-}};
+constexpr TetrominoData I_PIECE = {
+    PieceOffsets{ Point{-1,  0}, Point{ 0,  0}, Point{ 1,  0}, Point{ 2,  0} },
+    PieceOffsets{ Point{ 1, -1}, Point{ 1,  0}, Point{ 1,  1}, Point{ 1,  2} },
+    PieceOffsets{ Point{-1,  1}, Point{ 0,  1}, Point{ 1,  1}, Point{ 2,  1} },
+    PieceOffsets{ Point{ 0, -1}, Point{ 0,  0}, Point{ 0,  1}, Point{ 0,  2} }
+};
 
-// J-Piece: Central pivot at (0, 0)
-constexpr TetrominoData J_PIECE = {{
-    {{{ -1, -1 }, { -1,  0 }, {  0,  0 }, {  1,  0 }}}, // Rot 0
-    {{{  0, -1 }, {  1, -1 }, {  0,  0 }, {  0,  1 }}}, // Rot 1
-    {{{ -1,  0 }, {  0,  0 }, {  1,  0 }, {  1,  1 }}}, // Rot 2
-    {{{  0, -1 }, {  0,  0 }, { -1,  1 }, {  0,  1 }}}  // Rot 3
-}};
+constexpr TetrominoData J_PIECE = {
+    PieceOffsets{ Point{-1, -1}, Point{-1,  0}, Point{ 0,  0}, Point{ 1,  0} },
+    PieceOffsets{ Point{ 0, -1}, Point{ 1, -1}, Point{ 0,  0}, Point{ 0,  1} },
+    PieceOffsets{ Point{-1,  0}, Point{ 0,  0}, Point{ 1,  0}, Point{ 1,  1} },
+    PieceOffsets{ Point{ 0, -1}, Point{ 0,  0}, Point{-1,  1}, Point{ 0,  1} }
+};
 
-// L-Piece: Central pivot at (0, 0)
-constexpr TetrominoData L_PIECE = {{
-    {{{  1, -1 }, { -1,  0 }, {  0,  0 }, {  1,  0 }}}, // Rot 0
-    {{{  0, -1 }, {  0,  0 }, {  0,  1 }, {  1,  1 }}}, // Rot 1
-    {{{ -1,  0 }, {  0,  0 }, {  1,  0 }, { -1,  1 }}}, // Rot 2
-    {{{ -1, -1 }, {  0, -1 }, {  0,  0 }, {  0,  1 }}}  // Rot 3
-}};
+constexpr TetrominoData L_PIECE = {
+    PieceOffsets{ Point{ 1, -1}, Point{-1,  0}, Point{ 0,  0}, Point{ 1,  0} },
+    PieceOffsets{ Point{ 0, -1}, Point{ 0,  0}, Point{ 0,  1}, Point{ 1,  1} },
+    PieceOffsets{ Point{-1,  0}, Point{ 0,  0}, Point{ 1,  0}, Point{-1,  1} },
+    PieceOffsets{ Point{-1, -1}, Point{ 0, -1}, Point{ 0,  0}, Point{ 0,  1} }
+};
 
-// O-Piece: Fixed shape, all rotation states are identical
-constexpr TetrominoData O_PIECE = {{
-    {{{  0, -1 }, {  1, -1 }, {  0,  0 }, {  1,  0 }}}, // Rot 0
-    {{{  0, -1 }, {  1, -1 }, {  0,  0 }, {  1,  0 }}}, // Rot 1
-    {{{  0, -1 }, {  1, -1 }, {  0,  0 }, {  1,  0 }}}, // Rot 2
-    {{{  0, -1 }, {  1, -1 }, {  0,  0 }, {  1,  0 }}}  // Rot 3
-}};
+constexpr TetrominoData O_PIECE = {
+    PieceOffsets{ Point{ 0, -1}, Point{ 1, -1}, Point{ 0,  0}, Point{ 1,  0} },
+    PieceOffsets{ Point{ 0, -1}, Point{ 1, -1}, Point{ 0,  0}, Point{ 1,  0} },
+    PieceOffsets{ Point{ 0, -1}, Point{ 1, -1}, Point{ 0,  0}, Point{ 1,  0} },
+    PieceOffsets{ Point{ 0, -1}, Point{ 1, -1}, Point{ 0,  0}, Point{ 1,  0} }
+};
 
-// S-Piece: Central pivot at (0, 0)
-constexpr TetrominoData S_PIECE = {{
-    {{{  0, -1 }, {  1, -1 }, { -1,  0 }, {  0,  0 }}}, // Rot 0
-    {{{  0, -1 }, {  0,  0 }, {  1,  0 }, {  1,  1 }}}, // Rot 1
-    {{{  0,  0 }, {  1,  0 }, { -1,  1 }, {  0,  1 }}}, // Rot 2
-    {{{ -1, -1 }, { -1,  0 }, {  0,  0 }, {  0,  1 }}}  // Rot 3
-}};
+constexpr TetrominoData S_PIECE = {
+    PieceOffsets{ Point{ 0, -1}, Point{ 1, -1}, Point{-1,  0}, Point{ 0,  0} },
+    PieceOffsets{ Point{ 0, -1}, Point{ 0,  0}, Point{ 1,  0}, Point{ 1,  1} },
+    PieceOffsets{ Point{ 0,  0}, Point{ 1,  0}, Point{-1,  1}, Point{ 0,  1} },
+    PieceOffsets{ Point{-1, -1}, Point{-1,  0}, Point{ 0,  0}, Point{ 0,  1} }
+};
 
-// T-Piece: Central pivot at (0, 0)
-constexpr TetrominoData T_PIECE = {{
-    {{{  0, -1 }, { -1,  0 }, {  0,  0 }, {  1,  0 }}}, // Rot 0
-    {{{  0, -1 }, {  0,  0 }, {  1,  0 }, {  0,  1 }}}, // Rot 1
-    {{{ -1,  0 }, {  0,  0 }, {  1,  0 }, {  0,  1 }}}, // Rot 2
-    {{{  0, -1 }, { -1,  0 }, {  0,  0 }, {  0,  1 }}}  // Rot 3
-}};
+constexpr TetrominoData T_PIECE = {
+    PieceOffsets{ Point{ 0, -1}, Point{-1,  0}, Point{ 0,  0}, Point{ 1,  0} },
+    PieceOffsets{ Point{ 0, -1}, Point{ 0,  0}, Point{ 1,  0}, Point{ 0,  1} },
+    PieceOffsets{ Point{-1,  0}, Point{ 0,  0}, Point{ 1,  0}, Point{ 0,  1} },
+    PieceOffsets{ Point{ 0, -1}, Point{-1,  0}, Point{ 0,  0}, Point{ 0,  1} }
+};
 
-// Z-Piece: Central pivot at (0, 0)
-constexpr TetrominoData Z_PIECE = {{
-    {{{ -1, -1 }, {  0, -1 }, {  0,  0 }, {  1,  0 }}}, // Rot 0
-    {{{  1, -1 }, {  0,  0 }, {  1,  0 }, {  0,  1 }}}, // Rot 1
-    {{{ -1,  0 }, {  0,  0 }, {  0,  1 }, {  1,  1 }}}, // Rot 2
-    {{{  0, -1 }, { -1,  0 }, {  0,  0 }, { -1,  1 }}}  // Rot 3
-}};
+constexpr TetrominoData Z_PIECE = {
+    PieceOffsets{ Point{-1, -1}, Point{ 0, -1}, Point{ 0,  0}, Point{ 1,  0} },
+    PieceOffsets{ Point{ 1, -1}, Point{ 0,  0}, Point{ 1,  0}, Point{ 0,  1} },
+    PieceOffsets{ Point{-1,  0}, Point{ 0,  0}, Point{ 0,  1}, Point{ 1,  1} },
+    PieceOffsets{ Point{ 0, -1}, Point{-1,  0}, Point{ 0,  0}, Point{-1,  1} }
+};
 
-// Master Lookup Array indexed by PieceType enum:
-// TetrominoDataLUT[static_cast<std::size_t>(PieceType::T)]
+
+//Master Lookup Array indexed by PieceType enum:
+//TetrominoDataLUT[static_cast<std::size_t>(PieceType::T)]
 constexpr std::array<TetrominoData, 8> TETROMINO_LUT = {
     TetrominoData{}, // Index 0: None
     I_PIECE,         // Index 1: PieceType::I

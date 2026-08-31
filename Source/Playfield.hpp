@@ -9,6 +9,11 @@
 
 class Playfield {
 public:
+    Playfield() {
+        for(auto& c : cells) {
+            c = PieceType::None;
+        }
+    }
     static constexpr uint8_t WIDTH = 10;
     static constexpr uint8_t HEIGHT = 20;
     static constexpr uint8_t HIDDEN_ROWS = 2;
