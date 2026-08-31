@@ -14,6 +14,7 @@ public:
     void handleRotate();
     Playfield& getPlayfield();
     Piece& getActivePiece();
+    Piece& getNextPiece();
     uint32_t getScore();
 private:
     bool running {true};

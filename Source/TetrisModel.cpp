@@ -33,8 +33,7 @@ void TetrisModel::update(float dt) {
             nextBag = Bag();
             activePieceIndex = -1;
         }
-        activePieceIndex++;
-        activePiece = bag[activePieceIndex];
+        activePiece = bag[++activePieceIndex];
     }
 
     lastTime = 0;
@@ -68,4 +67,9 @@ void TetrisModel::handleRotate() {
 
 uint32_t TetrisModel::getScore() {
     return score;
+}
+
+
+Piece& TetrisModel::getNextPiece() {
+    return activePieceIndex != 6 ? bag[activePieceIndex + 1] : nextBag[0];
 }

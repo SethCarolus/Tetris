@@ -19,7 +19,7 @@ public:
     float getDeltaTime() { return GetFrameTime(); }
     TetrisView();
     ~TetrisView();
-    void render(const Playfield& playfield, const Piece& activePiece, const uint32_t score);
+    void render(const Playfield& playfield, const Piece& activePiece, const Piece& nextPiece, const uint32_t score);
     void handleInput();
 private:
     Callback onQuit;
@@ -35,10 +35,10 @@ private:
 const std::array<Color, 8>  ColorLUT{
     BLACK,
     SKYBLUE,
-    GOLD,
-    MAGENTA,
-    GREEN,
-    RED,
     DARKBLUE,
     ORANGE,
+    YELLOW,
+    GREEN,
+    MAGENTA,
+    RED,
 };
