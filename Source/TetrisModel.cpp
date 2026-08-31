@@ -2,17 +2,14 @@
 #include "Tetromino.hpp"
 
 TetrisModel::TetrisModel() {
-    activePiece.type = PieceType::J;
-    activePiece.Data = J_PIECE;
-    activePiece.x += 4;
-    activePiece.y += 4;
-    activePiece.rotation = 1;
+    activePieceIndex = 0;
+    activePiece = bag[activePieceIndex];
 }
 
 Playfield& TetrisModel::getPlayfield() {
     return  playfield;
 }
-ActivePiece& TetrisModel::getActivePiece() {
+Piece& TetrisModel::getActivePiece() {
     return  activePiece;
 };
 
@@ -29,6 +26,13 @@ void TetrisModel::update(float dt) {
     else {
         playfield.lockPiece(activePiece);
         playfield.clearLines();
+        if (activePieceIndex == 6) {
+            bag = nextBag;
+            nextBag = Bag();
+            activePieceIndex = -1;
+        }
+        activePieceIndex++;
+        activePiece = bag[activePieceIndex];
     }
 
     lastTime = 0;

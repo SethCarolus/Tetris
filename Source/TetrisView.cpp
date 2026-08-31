@@ -1,6 +1,7 @@
 #include "TetrisView.hpp"
 
 #include "raylib.h"
+#include <cstdint>
 
 TetrisView::TetrisView()
     : width(500), height(800), title("Tetris")
@@ -15,7 +16,7 @@ TetrisView::~TetrisView() {
    CloseWindow();
 }
 
-void TetrisView::render(const Playfield& playfield, const ActivePiece& activePiece) {
+void TetrisView::render(const Playfield& playfield, const Piece& activePiece) {
     int bw = height / playfield.TOTAL_HEIGHT;
     int bh = height / playfield.TOTAL_HEIGHT;    
     const int p = (width - bw * playfield.WIDTH) / 2; 
@@ -26,7 +27,8 @@ void TetrisView::render(const Playfield& playfield, const ActivePiece& activePie
     for (int y = playfield.HIDDEN_ROWS; y < playfield.TOTAL_HEIGHT; y++) {
         for(int x = 0; x < playfield.WIDTH; x++) {
             auto cell = playfield.getCell(x, y);
-            DrawRectangle(p + x * bw,  y * bh, bw - 2, bh - 2, BLACK);
+            uint8_t type = static_cast<uint8_t>(cell);
+            DrawRectangle(p + x * bw,  y * bh, bw - 2, bh - 2, ColorLUT[type]);
         }
     }
 
@@ -36,7 +38,9 @@ void TetrisView::render(const Playfield& playfield, const ActivePiece& activePie
     for(const auto& point : offets) {
         int x = activePiece.x + point.x;
         int y = activePiece.y + point.y;
-        DrawRectangle(p + x * bw,  y * bh, bw - 2, bh - 2, GREEN);
+
+        uint8_t type = static_cast<uint8_t>(activePiece.type);
+        DrawRectangle(p + x * bw,  y * bh, bw - 2, bh - 2, ColorLUT[type]);
     }
 
     EndDrawing();

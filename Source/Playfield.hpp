@@ -31,7 +31,7 @@ public:
         return cells[getIndex(x, y)];
     }
 
-    [[nodiscard]] bool checkCollisions(const ActivePiece& piece, int8_t offsetX = 0, int8_t offsetY = 0, int8_t rotationDelta = 0) {
+    [[nodiscard]] bool checkCollisions(const Piece& piece, int8_t offsetX = 0, int8_t offsetY = 0, int8_t rotationDelta = 0) {
         uint8_t targetRotation = (piece.rotation + rotationDelta + 4) % 4;
         const auto& offets = piece.Data.rotations[targetRotation];
 
@@ -50,7 +50,7 @@ public:
         return false;
     }
 
-    void lockPiece(ActivePiece piece) {
+    void lockPiece(Piece piece) {
         const auto& offsets = piece.getCurrentOffets();
         for (const auto& point: offsets) {
             int targetX = piece.x + point.x;

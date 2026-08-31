@@ -4,6 +4,7 @@
 #include "Tetromino.hpp"
 #include "raylib.h"
 
+#include <array>
 #include <functional>
 #include <string>
 
@@ -18,7 +19,7 @@ public:
     float getDeltaTime() { return GetFrameTime(); }
     TetrisView();
     ~TetrisView();
-    void render(const Playfield& playfield, const ActivePiece& activePiece);
+    void render(const Playfield& playfield, const Piece& activePiece);
     void handleInput();
 private:
     Callback onQuit;
@@ -29,4 +30,15 @@ private:
     int width;
     int height;
     std::string title;
+};
+
+const std::array<Color, 8>  ColorLUT{
+    BLACK,
+    SKYBLUE,
+    GOLD,
+    MAGENTA,
+    GREEN,
+    RED,
+    DARKBLUE,
+    ORANGE,
 };

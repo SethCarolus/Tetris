@@ -1,8 +1,11 @@
 #pragma once
 
+#include "raylib.h"
+
 #include <cstdint>
 #include <inttypes.h>
 #include <array>
+#include <vector>
 
 enum class PieceType: uint8_t{
     None = 0, I, J, L, O, S, T, Z
@@ -70,7 +73,7 @@ constexpr TetrominoData Z_PIECE = {
 
 //Master Lookup Array indexed by PieceType enum:
 //TetrominoDataLUT[static_cast<std::size_t>(PieceType::T)]
-constexpr std::array<TetrominoData, 8> TETROMINO_LUT = {
+const std::array<TetrominoData, 8> TETROMINO_LUT = {
     TetrominoData{}, // Index 0: None
     I_PIECE,         // Index 1: PieceType::I
     J_PIECE,         // Index 2: PieceType::J
@@ -81,7 +84,7 @@ constexpr std::array<TetrominoData, 8> TETROMINO_LUT = {
     Z_PIECE          // Index 7: PieceType::Z
 };
 
-struct ActivePiece {
+struct Piece {
     PieceType type {};
     TetrominoData Data {};
     int8_t x;
@@ -100,4 +103,44 @@ struct ActivePiece {
         rotation = (rotation + 3) % 4;
     }
     
+};
+
+class Bag {
+public:
+    Bag() {
+        pieces.clear();
+        pieces.reserve(7);
+
+        for (int i = 0; i < 7; i++) {
+            PieceType type = PieceType::I;
+            auto isInBag = [&type](std::vector<Piece> &bag) {
+                for (auto& piece : bag) {
+                    if (piece.type == type) {
+                        return  true;
+                    }
+                }
+                return false;
+            };
+            do {
+                type = static_cast<PieceType>(GetRandomValue(1, 7));
+            } while (isInBag(pieces));
+            pieces.push_back(  {
+                .type = type,
+                .Data = TETROMINO_LUT[static_cast<int>(type)],
+                .x = 3,
+                .y = 3,
+                .rotation = 0,
+            });
+        }
+
+    }
+
+    [[nodiscard]] std::vector<Piece> &getPieces() noexcept {
+        return  pieces;
+    }
+    Piece& operator[](const int index) {
+        return  pieces[index];
+    }
+private:
+    std::vector<Piece> pieces;
 };

@@ -13,7 +13,7 @@ public:
     void handleMoveRight();
     void handleRotate();
     Playfield& getPlayfield();
-    ActivePiece& getActivePiece();
+    Piece& getActivePiece();
 private:
     bool running {true};
 
@@ -22,5 +22,8 @@ private:
 
 
     Playfield playfield;
-    ActivePiece activePiece;
+    Piece activePiece;
+    Bag bag;
+    Bag nextBag;
+    size_t activePieceIndex;
 };
