@@ -1,5 +1,6 @@
 #include "TetrisModel.hpp"
 #include "Tetromino.hpp"
+
 #include <cstdint>
 
 TetrisModel::TetrisModel() {
@@ -15,10 +16,18 @@ Piece& TetrisModel::getActivePiece() {
 };
 
 void TetrisModel::update(float dt) {
+
     lastTime += dt;
 
     if (lastTime < interval) {
         return;
+    }
+
+    for (int x = 0; x < playfield.WIDTH; x++) {
+        if (playfield.getCell(x, 2) != PieceType::None) {
+            gameOver = true;
+            return;
+        }
     }
 
     if (!playfield.checkCollisions(activePiece, 0, 1)) {
@@ -72,4 +81,8 @@ uint32_t TetrisModel::getScore() {
 
 Piece& TetrisModel::getNextPiece() {
     return activePieceIndex != 6 ? bag[activePieceIndex + 1] : nextBag[0];
+}
+
+bool TetrisModel::isGameOver() {
+    return gameOver;
 }

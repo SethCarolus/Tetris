@@ -17,7 +17,16 @@ TetrisView::~TetrisView() {
    CloseWindow();
 }
 
-void TetrisView::render(const Playfield& playfield, const Piece& activePiece, const Piece& nextPiece, const uint32_t score) {
+void TetrisView::render(const Playfield& playfield, const Piece& activePiece, const Piece& nextPiece, const uint32_t score, const bool isGameOver) {
+
+    if (isGameOver) {
+        BeginDrawing();
+        ClearBackground(BLACK);
+        DrawText("Game is Over! Press Esc to Exit.",0 , 0, 20, WHITE);
+        EndDrawing(); 
+        return;
+    }
+
     int bw = height / playfield.TOTAL_HEIGHT;
     int bh = height / playfield.TOTAL_HEIGHT;    
     const int p = (width - bw * playfield.WIDTH) / 2; 

@@ -19,7 +19,7 @@ public:
     float getDeltaTime() { return GetFrameTime(); }
     TetrisView();
     ~TetrisView();
-    void render(const Playfield& playfield, const Piece& activePiece, const Piece& nextPiece, const uint32_t score);
+    void render(const Playfield& playfield, const Piece& activePiece, const Piece& nextPiece, const uint32_t score, const bool isGameOver);
     void handleInput();
 private:
     Callback onQuit;

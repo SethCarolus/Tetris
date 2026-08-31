@@ -16,6 +16,7 @@ public:
     Piece& getActivePiece();
     Piece& getNextPiece();
     uint32_t getScore();
+    bool isGameOver();
 private:
     bool running {true};
 
@@ -30,4 +31,6 @@ private:
     size_t activePieceIndex;
 
     uint32_t score = {0};
+
+    bool gameOver {false};
 };
