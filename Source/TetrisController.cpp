@@ -10,7 +10,7 @@ void TetrisController::run() {
     while (model.getRunning()) {
         view.handleInput();
         model.update(view.getDeltaTime());
-        view.render(model.getPlayfield(), model.getActivePiece());
+        view.render(model.getPlayfield(), model.getActivePiece(), model.getScore());
     }
 }
 

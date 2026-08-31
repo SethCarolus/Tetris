@@ -16,13 +16,14 @@ TetrisView::~TetrisView() {
    CloseWindow();
 }
 
-void TetrisView::render(const Playfield& playfield, const Piece& activePiece) {
+void TetrisView::render(const Playfield& playfield, const Piece& activePiece, const uint32_t score) {
     int bw = height / playfield.TOTAL_HEIGHT;
     int bh = height / playfield.TOTAL_HEIGHT;    
     const int p = (width - bw * playfield.WIDTH) / 2; 
 
     BeginDrawing();
     ClearBackground(ColorFromHSV(167, 0.67f, 0.67f));
+
     // Display Wall
     for (int y = playfield.HIDDEN_ROWS; y < playfield.TOTAL_HEIGHT; y++) {
         for(int x = 0; x < playfield.WIDTH; x++) {
@@ -42,6 +43,10 @@ void TetrisView::render(const Playfield& playfield, const Piece& activePiece) {
         uint8_t type = static_cast<uint8_t>(activePiece.type);
         DrawRectangle(p + x * bw,  y * bh, bw - 2, bh - 2, ColorLUT[type]);
     }
+
+    // Display Score
+    DrawText((("Score: " + std::to_string(score))).c_str(), width - p * 2,
+             0, 20, BLACK);
 
     EndDrawing();
 }

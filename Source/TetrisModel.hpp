@@ -14,6 +14,7 @@ public:
     void handleRotate();
     Playfield& getPlayfield();
     Piece& getActivePiece();
+    uint32_t getScore();
 private:
     bool running {true};
 
@@ -26,4 +27,6 @@ private:
     Bag bag;
     Bag nextBag;
     size_t activePieceIndex;
+
+    uint32_t score = {0};
 };

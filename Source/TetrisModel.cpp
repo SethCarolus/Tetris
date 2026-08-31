@@ -1,5 +1,6 @@
 #include "TetrisModel.hpp"
 #include "Tetromino.hpp"
+#include <cstdint>
 
 TetrisModel::TetrisModel() {
     activePieceIndex = 0;
@@ -25,7 +26,8 @@ void TetrisModel::update(float dt) {
     }
     else {
         playfield.lockPiece(activePiece);
-        playfield.clearLines();
+        auto lines = playfield.clearLines();
+        score += lines * 67;
         if (activePieceIndex == 6) {
             bag = nextBag;
             nextBag = Bag();
@@ -62,4 +64,8 @@ void TetrisModel::handleRotate() {
         return;
     }
     activePiece.rotateClockwise();
+}
+
+uint32_t TetrisModel::getScore() {
+    return score;
 }
